@@ -1,13 +1,14 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import PDFUploader from './components/pdf_uploader/PDFUploader';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
-      <div> Hello world </div>
+      <h1>PDF Uploader to Amazon S3</h1>
+      <PDFUploader />
     </div>
   );
-}
+};
 
 export default App;
