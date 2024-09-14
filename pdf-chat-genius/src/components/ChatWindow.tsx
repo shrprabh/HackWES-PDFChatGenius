@@ -3,7 +3,11 @@ import {storage} from "../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ChatPdfService } from "../Chat_Pdf.service";
 
-export const ChatWindow = () => { 
+interface Props {
+    setPdfUrl: (url: string) => any;
+}
+
+export const ChatWindow = (props: Props) => { 
     const [selectedFile, setSelectedFile] = useState(null);
     const [sourceId, setSourceId] = useState("");
     const [userMessagesList, setUserMessagesList] = useState<string[]>([]);
