@@ -1,25 +1,21 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ChatContainer = styled.div`
-    border: 1px solid #E0E0E0;
+    border: 1px solid #8b4513; /* Saddle brown for border */
     border-radius: 4px;
     height: calc(100vh - 126px);
-    /* background-color: yellow; */
     display: flex;
     flex-direction: column;
-    background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient blue */
+    background: linear-gradient(60deg, #white, #white); /* Warm beige to deep orange gradient */
 `;
 
-export const MessageStyle = styled.div<{isUser: boolean}>`
+export const MessageStyle = styled.div<{ isUser: boolean }>`
     border-radius: 6.5px;
-    margin-left: ${props => props.isUser ? 'auto' :  ''};
+    margin-left: ${props => props.isUser ? 'auto' : ''};
     margin-right: ${props => !props.isUser ? 'auto' : ''};
-    background-color: white;
+    background-color: ${props => props.isUser ? '#f5f5dc' : '#f5f5dc'}; /* Light green for user messages */
     padding: 8px 6px;
     max-width: 500px;
-    
-    // color: white;
-
 `;
 
 export const MessagesContainer = styled.div`
@@ -27,5 +23,4 @@ export const MessagesContainer = styled.div`
     flex-direction: column;
     padding: 6px;
     overflow-y: scroll;
-    
 `;
