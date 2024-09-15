@@ -17,10 +17,10 @@ export const Layout = () => {
     <div className="container-fluid">
       <Header />
       <div className="row">
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6 pe-0">
           <PDFViewer pdfLink={pdfLink}/>
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6 ps-0">
           <ChatWindow setPdfUrl={setPdfLinkHelper}/>
         </div>
       </div>

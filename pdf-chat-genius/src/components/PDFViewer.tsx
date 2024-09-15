@@ -7,7 +7,7 @@ interface PDFViewerProps {
 
 export const PDFViewer: React.FC<PDFViewerProps> = (PDFViewerProp) => {
   return (
-    <div style={{ height: '100vh', overflow: 'hidden', backgroundColor: '#f5f5dc', padding: '20px', fontFamily: 'Georgia, serif', color: '#4a4a4a' }}>
+    <div style={{ height: 'calc(100vh - 126px)', overflow: 'hidden', backgroundColor: '#f5f5dc', padding: '20px', fontFamily: 'Georgia, serif', color: '#4a4a4a' }}>
       {PDFViewerProp.pdfLink ? (
         <iframe
           src={PDFViewerProp.pdfLink}

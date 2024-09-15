@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {storage} from "../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ChatPdfService, FAKE_MESSAGES } from "../Chat_Pdf.service";
@@ -21,7 +21,7 @@ export const ChatWindow = (props: Props) => {
     const [messagesList, setMessagesList] = useState<Message[]>([]);
     const [isChatStarted, setIsChatStarted] = useState(false);
     const [query, setQuery] = useState("");
-    
+    const fileInputRef = useRef(null);
     const chatPdfService = new ChatPdfService();
 
     useEffect(() => {
@@ -47,6 +47,7 @@ export const ChatWindow = (props: Props) => {
             const snapshot = await uploadBytes(storageRef, event.target.files[0]!);
             const downloadURL = await getDownloadURL(snapshot.ref);
             console.log("File available at:", downloadURL);
+
             setIsChatStarted(true);
             if (!sourceId)
                 addFileToPdfChat(downloadURL);
@@ -60,6 +61,7 @@ export const ChatWindow = (props: Props) => {
        console.log('response: ', response);
        localStorage.setItem("sourceId", response.sourceId);
        setSourceId(response.sourceId);
+        props.setPdfUrl(downloadURL);
     }
 
     const sendQuery = async () => {
@@ -68,12 +70,10 @@ export const ChatWindow = (props: Props) => {
         }
 
         setUserMessagesList((prev) => [...prev, { content: query, timestamp: Date.now()}])
-        // userMessagesList.push({ content: query, timestamp: Date.now()});
 
         const assistanctResponse = await chatPdfService.sendQuery(sourceId, query);
 
         setAssistantMessagesList((prev) => [...prev, { content: assistanctResponse.content, timestamp: Date.now()}])
-        // assistantMessagesList.push({ content: assistanctResponse.content, timestamp: Date.now()});
 
         setQuery("");
     }
@@ -86,8 +86,14 @@ export const ChatWindow = (props: Props) => {
 
     const UploadJSX = () => {
         return (
-        <div className="d-flex justify-content-center align-items-center" style={{marginTop: 50}}>
-            <input type="file" onChange={handleSubmit} />
+        <div className="d-flex justify-content-center align-items-center">
+            <input ref={fileInputRef} hidden={true} type="file" onChange={handleSubmit} />
+            <button 
+                onClick={() => {(fileInputRef.current as any).click()}}
+                style={{ padding: '10px 20px', fontSize: '16px', backgroundColor: 'rgb(255, 102, 0)', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
+            >
+            Upload PDF
+          </button>
         </div> );
     }
 
@@ -103,7 +109,7 @@ export const ChatWindow = (props: Props) => {
             })}
         </MessagesContainer> }
         {!isChatStarted && <UploadJSX />}
-        <div className="input-group" style={{marginTop: 'auto', marginBottom: 2}}>
+        {isChatStarted && <div className="input-group" style={{marginTop: 'auto', marginBottom: 2}}>
             <input type="text" 
                  value={query} 
                  onKeyDown={handleKeyPress}
@@ -117,7 +123,7 @@ export const ChatWindow = (props: Props) => {
                     </svg>
                 </span>
             </div>
-        </div>
+        </div>}
     </ChatContainer>
     );
 }

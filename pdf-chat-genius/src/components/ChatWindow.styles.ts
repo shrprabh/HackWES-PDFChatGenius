@@ -6,6 +6,7 @@ export const ChatContainer = styled.div`
     height: calc(100vh - 126px);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background: linear-gradient(60deg, #white, #white); /* Warm beige to deep orange gradient */
 `;
 
