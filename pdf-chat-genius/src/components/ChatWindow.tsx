@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { storage } from "../firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { ChatPdfService } from "../Chat_Pdf.service";
+import { ChatPdfService, FAKE_MESSAGES } from "../Chat_Pdf.service";
 import { ChatContainer, MessagesContainer, MessageStyle } from "./ChatWindow.styles";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,7 +24,7 @@ const MessageContent = ({ content }: { content: string }) => (
         remarkPlugins={[remarkMath]}
         rehypePlugins={[rehypeKatex]}
         components={{
-            p: ({ children }) => <p style={{ textAlign: 'left', margin: '0 0 10px 0' }}>{children}</p>,
+            p: ({ children }) => <p style={{ textAlign: 'left', margin: '0 0 10px 0', marginBottom: 0 }}>{children}</p>,
             ul: ({ children }) => <ul style={{ marginLeft: '20px', textAlign: 'left' }}>{children}</ul>,
             ol: ({ children }) => <ol style={{ marginLeft: '20px', textAlign: 'left' }}>{children}</ol>,
             li: ({ children }) => <li style={{ marginBottom: '5px', textAlign: 'left' }}>{children}</li>,
@@ -110,12 +110,12 @@ export const ChatWindow = (props: Props) => {
 
     const sendQuery = async () => {
         if (!query.trim()) return;
-
+        setQuery("");
         setUserMessagesList(prev => [...prev, { content: query, timestamp: Date.now() }]);
 
         const assistantResponse = await chatPdfService.sendQuery(sourceId, query);
         setAssistantMessagesList(prev => [...prev, { content: assistantResponse.content, timestamp: Date.now() }]);
-        setQuery("");
+        
     };
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -162,7 +162,7 @@ export const ChatWindow = (props: Props) => {
             {!isChatStarted && <UploadJSX />}
             {isChatStarted && (
                 <div className="input-group"  style={{ marginTop: 'auto' }}>
-                    <button className="btn btn-primary" onClick={newChatHanlder}> 
+                    <button style={{background: '#28a745', border: 0}} className="btn btn-primary" onClick={newChatHanlder}> 
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                         </svg>
@@ -176,7 +176,7 @@ export const ChatWindow = (props: Props) => {
                         placeholder="Ask Your Pdf Assistant"
                     />
                     <div onClick={sendQuery} className="input-group-append">
-                        <span className="input-group-text">
+                        <span style={{color: '#007bff'}} className="input-group-text">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-send" viewBox="0 0 16 16">
                                 <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
                             </svg>

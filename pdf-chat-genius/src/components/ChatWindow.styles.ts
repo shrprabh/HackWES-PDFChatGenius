@@ -15,10 +15,10 @@ export const MessageStyle = styled.div<{ isUser: boolean }>`
     border-radius: 6.5px;
     margin-left: ${props => props.isUser ? 'auto' : ''};
     margin-right: ${props => !props.isUser ? 'auto' : ''};
-    background-color: ${props => props.isUser ? '#1972F5 ' : '#4682B4 '}; /* Light green for user messages */
+    background-color: rgb(245, 245, 220); // ${props => props.isUser ? '#1972F5 ' : '#4682B4 '}; /* Light green for user messages */
     padding: 8px 6px;
     max-width: 500px;
-    color:white
+    color:black;
 `;
 
 export const MessagesContainer = styled.div`
