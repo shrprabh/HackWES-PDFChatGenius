@@ -18,7 +18,7 @@ export const Layout = () => {
       <Header />
       <div className="row">
         <div className="col-12 col-md-6">
-          <PDFViewer />
+          <PDFViewer pdfLink={pdfLink}/>
         </div>
         <div className="col-12 col-md-6">
           <ChatWindow setPdfUrl={setPdfLinkHelper}/>
