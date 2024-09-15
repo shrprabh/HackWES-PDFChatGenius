@@ -49,7 +49,7 @@ export const ChatWindow = (props: Props) => {
             console.log("File available at:", downloadURL);
 
             setIsChatStarted(true);
-            if (!sourceId)
+            
                 addFileToPdfChat(downloadURL);
         } catch (error) {
             console.error("Upload failed", error); 
@@ -61,7 +61,8 @@ export const ChatWindow = (props: Props) => {
        console.log('response: ', response);
        localStorage.setItem("sourceId", response.sourceId);
        setSourceId(response.sourceId);
-        props.setPdfUrl(downloadURL);
+       props.setPdfUrl(downloadURL);
+       console.log("Inside AddFileToPD Chat",downloadURL)
     }
 
     const sendQuery = async () => {
