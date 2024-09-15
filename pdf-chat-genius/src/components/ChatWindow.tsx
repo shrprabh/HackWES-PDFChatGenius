@@ -42,6 +42,7 @@ export const ChatWindow = (props: Props) => {
     const [messagesList, setMessagesList] = useState<Message[]>([]);
     const [isChatStarted, setIsChatStarted] = useState(false);
     const [query, setQuery] = useState("");
+    const [queryResponseInProgress, setQueryResponseInProgress] = useState(false);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const messagesContainerRef = useRef(null);
     
@@ -112,8 +113,10 @@ export const ChatWindow = (props: Props) => {
         if (!query.trim()) return;
         setQuery("");
         setUserMessagesList(prev => [...prev, { content: query, timestamp: Date.now() }]);
-
+        
+        setQueryResponseInProgress(true);
         const assistantResponse = await chatPdfService.sendQuery(sourceId, query);
+        setQueryResponseInProgress(false);
         setAssistantMessagesList(prev => [...prev, { content: assistantResponse.content, timestamp: Date.now() }]);
         
     };
@@ -154,9 +157,10 @@ export const ChatWindow = (props: Props) => {
                 <MessagesContainer ref={messagesContainerRef} >
                     {messagesList.map((message, index) => (
                         <MessageStyle key={index} isUser={index % 2 === 0}>
-                            <MessageContent content={message.content} />
+                            {<MessageContent content={message.content} />}
                         </MessageStyle>
                     ))}
+                    {queryResponseInProgress && <MessageStyle isUser={false}>Thinking...</MessageStyle>}
                 </MessagesContainer>
             )}
             {!isChatStarted && <UploadJSX />}

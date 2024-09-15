@@ -15,6 +15,7 @@ export const MessageStyle = styled.div<{ isUser: boolean }>`
     border-radius: 6.5px;
     margin-left: ${props => props.isUser ? 'auto' : ''};
     margin-right: ${props => !props.isUser ? 'auto' : ''};
+    margin-bottom: 6px;
     background-color: rgb(245, 245, 220); // ${props => props.isUser ? '#1972F5 ' : '#4682B4 '}; /* Light green for user messages */
     padding: 8px 6px;
     max-width: 500px;
