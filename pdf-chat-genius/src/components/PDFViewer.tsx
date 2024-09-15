@@ -5,24 +5,26 @@ interface PDFViewerProps {
   pdfLink?: string;
 }
 
-export const PDFViewer: React.FC<PDFViewerProps> = () => {
-  // Static PDF link
-  const pdfLink = "https://firebasestorage.googleapis.com/v0/b/hackwest-dee28.appspot.com/o/hackwest%2FHackWest.pdf?alt=media&token=ffe57b4e-9cf0-4ae8-930c-eca8a622d88d";
-
+export const PDFViewer: React.FC<PDFViewerProps> = (PDFViewerProp) => {
   return (
-    <div>
-      {pdfLink ? (
+    <div style={{ height: '100vh', overflow: 'hidden', backgroundColor: '#f5f5dc', padding: '20px', fontFamily: 'Georgia, serif', color: '#4a4a4a' }}>
+      {PDFViewerProp.pdfLink ? (
         <iframe
-          src={pdfLink}
+          src={PDFViewerProp.pdfLink}
           width="100%"
-          height="850px"
+          height="90%"
           title="PDF Viewer"
           style={{ border: 'none' }}
         ></iframe>
       ) : (
-        <div>
-          <h1>PDF Viewer</h1>
-          <p>No PDF uploaded yet. Please upload a PDF in the chat window.</p>
+        <div style={{ textAlign: 'center', marginTop: '20%' }}>
+          <h1 style={{ fontSize: '28px', marginBottom: '10px', color: '#8b4513' }}>Welcome to HackWesTX Chat Genius</h1>
+          <p style={{ fontSize: '18px', marginBottom: '20px', backgroundColor: '#ff6600', color: '#fff', padding: '10px', borderRadius: '5px' }}>
+            Your AI-powered PDF assistant is ready to help!
+          </p>
+          <p style={{ fontSize: '16px', marginTop: '20px', color: '#666' }}>
+            Enjoy free access and unlimited chats. Upload any PDF to study and get answers like a pro. Prepare for exams efficiently without reading every page. View both PDF and chat side by side.
+          </p>
         </div>
       )}
     </div>

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
-  background-color: #f8f9fa;
+  background-color: #f5f5dc; /* Warm beige to match the theme */
   padding: 10px;
   text-align: center;
-  border-top: 2px solid #e9ecef;
+  border-top: 2px solid #8b4513; /* Saddle brown for a rustic touch */
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -13,7 +13,8 @@ const FooterContainer = styled.footer`
 const FooterText = styled.p`
   margin: 0;
   font-size: 1rem;
-  color: #343a40;
+  color: #8b0000; /* Deep red for contrast */
+  font-family: 'Georgia, serif'; /* Classic font for a traditional feel */
 `;
 
 export const Footer = () => {
