@@ -1,5 +1,13 @@
 import axios from "axios";
 
+
+export const FAKE_MESSAGES = [
+    {content: "What is this PDF about", timestamp: 1},
+    {content: "Its about algorithms by MIT", timestamp: 2},
+    {content: "What is an algorithm", timestamp: 3},
+    {content: "Algorithm is a sequence of steps to execute a task", timestamp: 3}
+];
+
 export class ChatPdfService {
 
     CHAT_PDF_API_KEY  = "sec_kLcuXOB6PB6CezmIQS2JTvWQCgsVt3Am";
