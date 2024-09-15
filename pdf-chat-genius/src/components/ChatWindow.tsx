@@ -43,20 +43,29 @@ export const ChatWindow = (props: Props) => {
     const [isChatStarted, setIsChatStarted] = useState(false);
     const [query, setQuery] = useState("");
     const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const messagesContainerRef = useRef(null);
+    
     const chatPdfService = new ChatPdfService();
 
-    useEffect(() => {
-        const storedSourceId = localStorage.getItem("sourceId");
-        if (storedSourceId) {
-            setSourceId(storedSourceId);
-        }
-    }, []);
+    // useEffect(() => {
+    //     const storedSourceId = localStorage.getItem("sourceId");
+    //     if (storedSourceId) {
+    //         setSourceId(storedSourceId);
+    //     }
+    // }, []);
 
     useEffect(() => {
         const combinedMessages = [...userMessagesList, ...assistantMessagesList];
         combinedMessages.sort((a, b) => a.timestamp - b.timestamp);
         setMessagesList(combinedMessages);
     }, [userMessagesList, assistantMessagesList]);
+
+    useEffect(() => {
+        if (messagesContainerRef?.current) {
+            const container  = messagesContainerRef.current as any;
+            container.scrollTop = container.scrollHeight;
+        }
+    }, [messagesList.length])
 
     const handleSubmit = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -68,13 +77,22 @@ export const ChatWindow = (props: Props) => {
                 const downloadURL = await getDownloadURL(snapshot.ref);
 
                 setIsChatStarted(true);
-                await addFileToPdfChat(downloadURL);
+                // if (!sourceId)
+                    await addFileToPdfChat(downloadURL);
             } catch (error) {
                 console.error("Upload failed", error);
                 toast.error('File upload failed. Please try again.');
             }
         }
     };
+
+    const newChatHanlder = () => {
+        setIsChatStarted(false);
+        setSourceId("");
+        props.setPdfUrl("");
+        setUserMessagesList([]);
+        setAssistantMessagesList([]);
+    }
 
     const addFileToPdfChat = async (downloadURL: string) => {
         try {
@@ -107,22 +125,25 @@ export const ChatWindow = (props: Props) => {
     };
 
     const UploadJSX = () => (
-        <div className="d-flex justify-content-center align-items-center">
-            <input ref={fileInputRef} hidden type="file" onChange={handleSubmit} />
-            <button
-                onClick={() => fileInputRef.current?.click()}
-                style={{
-                    padding: '10px 20px',
-                    fontSize: '16px',
-                    backgroundColor: 'rgb(255, 102, 0)',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer'
-                }}
-            >
-                Upload PDF
-            </button>
+        <div className="d-flex justify-content-center align-items-center flex-column">
+            <div>
+                <input ref={fileInputRef} accept="application/pdf" hidden type="file" onChange={handleSubmit} />
+                <button
+                    onClick={() => fileInputRef.current?.click()}
+                    style={{
+                        padding: '10px 20px',
+                        fontSize: '16px',
+                        backgroundColor: 'rgb(255, 102, 0)',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '5px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Upload PDF
+                </button>
+            </div>
+            <div style={{marginTop: 4, color: '#E0E0E0'}}> Please Upload PDF file to get started </div>
         </div>
     );
 
@@ -130,7 +151,7 @@ export const ChatWindow = (props: Props) => {
         <ChatContainer>
             <ToastContainer position="top-right" autoClose={5000} />
             {isChatStarted && (
-                <MessagesContainer>
+                <MessagesContainer ref={messagesContainerRef} >
                     {messagesList.map((message, index) => (
                         <MessageStyle key={index} isUser={index % 2 === 0}>
                             <MessageContent content={message.content} />
@@ -140,7 +161,12 @@ export const ChatWindow = (props: Props) => {
             )}
             {!isChatStarted && <UploadJSX />}
             {isChatStarted && (
-                <div className="input-group" style={{ marginTop: 'auto', marginBottom: 2 }}>
+                <div className="input-group"  style={{ marginTop: 'auto' }}>
+                    <button className="btn btn-primary" onClick={newChatHanlder}> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
+                    </button>
                     <input
                         type="text"
                         value={query}

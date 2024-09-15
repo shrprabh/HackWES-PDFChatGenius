@@ -17,7 +17,7 @@ export const PDFViewer: React.FC<PDFViewerProps> = (PDFViewerProp) => {
           style={{ border: 'none' }}
         ></iframe>
       ) : (
-        <div style={{ textAlign: 'center', marginTop: '20%' }}>
+        <div style={{ textAlign: 'center' }}>
           <h1 style={{ fontSize: '28px', marginBottom: '10px', color: '#8b4513' }}>Welcome to HackWesTX Chat Genius</h1>
           <p style={{ fontSize: '18px', marginBottom: '20px', backgroundColor: '#ff6600', color: '#fff', padding: '10px', borderRadius: '5px' }}>
             Your AI-powered PDF assistant is ready to help!
