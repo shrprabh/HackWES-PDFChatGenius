@@ -1,7 +1,3 @@
-Here’s a comprehensive README for your HackWES-PDFChatGenius web application:
-
----
-
 # HackWES-PDFChatGenius
 
 Unlock the power of your PDFs with **HackWES-PDFChatGenius**! Developed during the HackWES hackathon, this innovative project revolutionizes how you interact with PDF documents. By simply uploading a PDF, users can engage in natural conversations with an AI assistant to extract information, ask questions, and gain deeper insights from their documents.
@@ -86,7 +82,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Firebase Documentation](https://firebase.google.com/docs)
 - [Amazon S3 Documentation](https://aws.amazon.com/s3/)
 - [ChatGPT API Documentation](https://platform.openai.com/docs/)
-
----
-
-Feel free to modify any sections as needed!
