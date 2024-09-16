@@ -1,7 +1,7 @@
 {
   "name": "pdf-chat-genius",
   "version": "0.1.0",
-  "homepage": "https://shrprabh.github.io/HackWES-PDFChatGenius/tree/main/pdf-chat-genius/",
+  "homepage": "https://shrprabh.github.io/HackWES-PDFChatGenius/pdf-chat-genius",
   "private": true,
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
