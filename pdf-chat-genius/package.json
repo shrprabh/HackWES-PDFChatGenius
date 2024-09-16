@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
     "firebase": "^10.13.1",
     "katex": "^0.16.11",
     "pdfjs-dist": "^3.4.120",
