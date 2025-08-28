@@ -1,7 +1,6 @@
 # HackWES-PDFChatGenius
 
 Unlock the power of your PDFs with **HackWES-PDFChatGenius**! Developed during the HackWES hackathon, this innovative project revolutionizes how you interact with PDF documents. By simply uploading a PDF, users can engage in natural conversations with an AI assistant to extract information, ask questions, and gain deeper insights from their documents.
-
 ## Features
 
 - **Intelligent PDF Interaction**: Upload any PDF and ask questions to learn about the content.
@@ -19,6 +18,11 @@ Unlock the power of your PDFs with **HackWES-PDFChatGenius**! Developed during t
   - `react-toastify`: For notifications
   - `styled-components`: For dynamic styling
   - `react-pdf`, `react-markdown`: For rendering PDFs and Markdown content
+## Screenshots of WebApp ( RAG at its best )
+<img width="2547" height="1332" alt="image" src="https://github.com/user-attachments/assets/ceccb8c6-b804-4b69-8883-27bee376c462" />
+<img width="2546" height="1326" alt="image" src="https://github.com/user-attachments/assets/59015431-e8dd-416a-b69d-5041521b46c5" />
+<img width="2549" height="1336" alt="Screenshot 2025-08-27 at 7 07 35 PM" src="https://github.com/user-attachments/assets/4a48411d-b09b-493a-9fe4-6637d574b380" />
+
 
 ## Setup and Installation
 
