@@ -18,6 +18,8 @@ Unlock the power of your PDFs with **HackWES-PDFChatGenius**! Developed during t
   - `react-toastify`: For notifications
   - `styled-components`: For dynamic styling
   - `react-pdf`, `react-markdown`: For rendering PDFs and Markdown content
+
+## Live App: https://shrprabh.github.io/pdf-chat-genius/
 ## Screenshots of WebApp ( RAG at its best )
 <img width="2547" height="1332" alt="image" src="https://github.com/user-attachments/assets/ceccb8c6-b804-4b69-8883-27bee376c462" />
 <img width="2546" height="1326" alt="image" src="https://github.com/user-attachments/assets/59015431-e8dd-416a-b69d-5041521b46c5" />
